@@ -33,12 +33,7 @@ func (a *RedisHelper) CacheStruct(v interface{}) error {
 }
 
 func (a *RedisHelper) Read() (string, error) {
-	v, e := a.Redis.Read(a.Key)
-	if e != nil {
-		return "", e
-	}
-	_ = a.SetExpr()
-	return v, nil
+	return a.Redis.Read(a.Key)
 }
 
 func (a *RedisHelper) ReadStruct(v interface{}) error {
@@ -46,7 +41,6 @@ func (a *RedisHelper) ReadStruct(v interface{}) error {
 	if e != nil {
 		return e
 	}
-	_ = a.SetExpr()
 	return json.Unmarshal([]byte(t), v)
 }
 
